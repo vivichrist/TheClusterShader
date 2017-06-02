@@ -31,8 +31,7 @@
 
 			struct v2f
 			{
-				float2 pos		 : TEXCOORD0;
-				//float2 uv		 : TEXCOORD1;
+				float2 zdepth	 : TEXCOORD0;
 				// UNITY_FOG_COORDS(1)
 			};
 
@@ -40,8 +39,7 @@
 			{
 				v2f o;
 				outpos = UnityObjectToClipPos(v.vertex);
-				o.pos = outpos.zw;
-				//o.uv = v.uv;
+				o.zdepth = outpos.zw;
 				// UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}
@@ -65,33 +63,23 @@
 			
 			float4 frag (v2f i, UNITY_VPOS_TYPE vpos : VPOS ) : SV_Target
 			{
-				float2 pos;
-				pos.x = i.pos.x / i.pos.y;
-				pos.y = i.pos.y;
-				float depth = Linear01Depth(pos.x);
-				lightListIndex cluster = _Clusters[(int)((float)vpos.x / (float)_TileSize) * _Cellsy * _Cellsz
-												 + (int)((float)vpos.y / (float)_TileSize) * _Cellsz
-												 + depth * _Cellsz];
-				if (cluster.listsize == 0) return float4(0.0, 0.0, 0.0, 1.0);
+				float depth = Linear01Depth(i.zdepth.x / i.zdepth.y);
+				lightListIndex cluster = _Clusters[((int)(vpos.x / _TileSize) * _Cellsy * _Cellsz)
+												 + ((int)((_ScreenParams.y - vpos.y) / _TileSize) * _Cellsz)
+												 + (depth * _Cellsz)];
+				if (cluster.listsize == 0) return float4(depth, depth, depth, 1.0);
 				uint lgtindex = _LightLists[cluster.index];
-				float4 light = _LightParams[lgtindex]._m01_m11_m21_m31;
-//				float4 acccol;
-				float4 col;
-//				for (int i = 0; i< cluster.listsize; ++i)
-//				{
-					col.w = 1;
-					col.xyz = light.xyz;
-//					acccol = ((acccol * i) + col) / i + 1;
-//				}
-				// apply fog
+				float4 acccol = float4(depth, depth, depth, 1.0);
+				float3 col;
+				for (int i = 0; i< min(cluster.listsize, 5); ++i)
+				{
+					col = _LightParams[lgtindex + i]._m01_m11_m21;
+					acccol.xyz = ((acccol.xyz * (i + 1)) + col) / (i + 2);
+				}
+				acccol.w = 1;
 				// UNITY_APPLY_FOG(i.fogCoord, col);
-//				if (depth < 0.01) 
-//					return float4(1.0, 0.0, depth, 1.0);
-//				else if (depth > 0.9) 
-//					return float4(0.0, 1.0, depth, 1.0);
-//				else
-//					return float4(vpos.x / _ScreenParams.x, vpos.y / _ScreenParams.y, 0.0, 1.0);
-				return light;
+				return acccol;
+				//return light;
 			}
 			ENDCG
 

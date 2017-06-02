@@ -89,11 +89,12 @@ public static class LightAWrapper
         clipLights(lights, ref size);
     }
 
-    public static void registerLights(float[,] lights)
+    public static int registerLights(float[,] lights)
     {
         Assert.IsTrue(lights.GetLength(1) == 4);
         ulong size = (ulong)lights.GetLongLength(0);
         regLTs(lights, ref size);
+        return (int)size;
     }
 
     public static void scanLights(float[,] lights)

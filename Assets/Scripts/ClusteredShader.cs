@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 
 public class ClusteredShader : MonoBehaviour {
@@ -101,21 +102,25 @@ public class ClusteredShader : MonoBehaviour {
                                                 Convert.ToUInt32(cam.pixelHeight),
                                                 cam.nearClipPlane,
                                                 cam.farClipPlane);
-                LightAWrapper.registerLights(pLights);
+                int num = LightAWrapper.registerLights(pLights);
+                if (num == 0)
+                    throw new ExternalException("No Lights to Scan!");
                 LightAWrapper.createCullingPlanes(cam.transform.position,
-                                              cam.transform.up,
-                                              cam.transform.forward,
+                                                  cam.transform.up.normalized,
+                                                  cam.transform.forward.normalized,
                                               tile_size,
                                               depth_divisions);
                 LightAWrapper.scanRegisteredLights();
                 llsize = LightAWrapper.getLightListsSize();
-                tx = new ComputeBuffer(llsize, sizeof(uint));
-                Shader.SetGlobalBuffer("_LightLists", tx);
-                Shader.SetGlobalInt("_LightListsSize", llsize);
-                //Debug.Log("ll size:" + llsize);
-                System.IntPtr xptr = tx.GetNativeBufferPtr();
-                LightAWrapper.setLightListsPtr(ref xptr);
-                //
+                if (llsize != 0)
+                {
+                    tx = new ComputeBuffer(16384, sizeof(uint));
+                    Shader.SetGlobalBuffer("_LightLists", tx);
+                    Shader.SetGlobalInt("_LightListsSize", llsize);
+                    //Debug.Log("ll size:" + llsize);
+                    System.IntPtr xptr = tx.GetNativeBufferPtr();
+                    LightAWrapper.setLightListsPtr(ref xptr);
+                }
                 LightAWrapper.getClsSize(ref sx, ref sy, ref sz);
                 txxx = new ComputeBuffer((int)(sx * sy * sz), sizeof(uint) * 2);
                 Shader.SetGlobalBuffer("_Clusters", txxx);
@@ -149,23 +154,21 @@ public class ClusteredShader : MonoBehaviour {
                                                   cam.transform.forward.normalized,
                                                   tile_size,
                                                   depth_divisions);
-                LightAWrapper.scanRegisteredLights();
-                llsize = LightAWrapper.getLightListsSize();
-                if (llsize != 0)
-                {
-                    tx.Release();
-                    tx = new ComputeBuffer(llsize, sizeof(uint));
-                    Shader.SetGlobalInt("_LightListsSize", llsize);
-                    tx.SetCounterValue((uint)llsize);
-                    System.IntPtr xptr = tx.GetNativeBufferPtr();
-                    LightAWrapper.setLightListsPtr(ref xptr);
-                }
-                System.IntPtr xxxptr = txxx.GetNativeBufferPtr();
-                LightAWrapper.setClustersPtr(ref xxxptr);
                 // Issue a plugin event with arbitrary integer identifier.
                 // The plugin can distinguish between different
                 // things it needs to do based on this ID.
                 // For our simple plugin, it does not matter which ID we pass here.
+                LightAWrapper.scanRegisteredLights();
+                llsize = LightAWrapper.getLightListsSize();
+                if (llsize > 0)
+                {
+                    Shader.SetGlobalInt("_LightListsSize", llsize);
+                    tx.SetCounterValue((uint)llsize);
+                    System.IntPtr xptr = tx.GetNativeBufferPtr();
+                    LightAWrapper.setLightListsPtr(ref xptr);
+                    System.IntPtr xxxptr = txxx.GetNativeBufferPtr();
+                    LightAWrapper.setClustersPtr(ref xxxptr);
+                }
                 GL.IssuePluginEvent(LightAWrapper.GetRenderEventFunc(), 1);
             }
         }
