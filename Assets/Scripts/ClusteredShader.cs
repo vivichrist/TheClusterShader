@@ -97,7 +97,7 @@ public class ClusteredShader : MonoBehaviour {
                 //cam.depthTextureMode = DepthTextureMode.Depth;
                 width = cam.pixelWidth;
                 height = cam.pixelWidth;
-                LightAWrapper.createLightAssignment(cam.fieldOfView,
+                LightAWrapper.createLightAssignment(Mathf.Deg2Rad * cam.fieldOfView,
                                                 Convert.ToUInt32(cam.pixelWidth),
                                                 Convert.ToUInt32(cam.pixelHeight),
                                                 cam.nearClipPlane,
@@ -114,7 +114,7 @@ public class ClusteredShader : MonoBehaviour {
                 llsize = LightAWrapper.getLightListsSize();
                 if (llsize != 0)
                 {
-                    tx = new ComputeBuffer(16384, sizeof(uint));
+                    tx = new ComputeBuffer(65536, sizeof(uint));
                     Shader.SetGlobalBuffer("_LightLists", tx);
                     Shader.SetGlobalInt("_LightListsSize", llsize);
                     //Debug.Log("ll size:" + llsize);

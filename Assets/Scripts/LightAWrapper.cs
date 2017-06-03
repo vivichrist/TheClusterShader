@@ -136,9 +136,9 @@ public static class LightAWrapper
 
     public static int getClustersSize()
     {
-        ulong sx = 0, sy = 0, sz = 0, size = 0;
+        ulong sx = 0, sy = 0, sz = 0, size;
         getClsSize(ref sx, ref sy, ref sz);
-        size = sx * sy * sz * 2;
+        size = sx * sy * sz;
         return (int)size;
     }
 
