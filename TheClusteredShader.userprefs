@@ -1,12 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ClusteredShader.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shaders/Clustering.shader">
     <Files>
-      <File FileName="Assets/Shaders/Clustering.shader" Line="94" Column="15" />
-      <File FileName="Assets/Scripts/ClusteredShader.cs" Line="118" Column="66" />
+      <File FileName="Assets/Shaders/Clustering.shader" Line="127" Column="18" />
+      <File FileName="Assets/Shaders/My First Lighting Shader.shader" Line="16" Column="5" />
+      <File FileName="Assets/Scripts/ClusteredShader.cs" Line="100" Column="63" />
       <File FileName="Assets/Scripts/LightAWrapper.cs" Line="1" Column="1" />
       <File FileName="Assets/Shaders/Standard.shader" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Fly.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Fly.cs" Line="46" Column="83" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

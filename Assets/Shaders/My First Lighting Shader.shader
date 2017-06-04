@@ -84,7 +84,6 @@ Shader "Custom/My First Lighting Shader" {
 					light, indirectLight
 				);
 			}
-
 			ENDCG
 		}
 	}
