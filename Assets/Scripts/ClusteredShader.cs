@@ -97,7 +97,7 @@ public class ClusteredShader : MonoBehaviour
             } else
             {
                 Debug.Log("Camera:" + cam);
-                cam.depthTextureMode = DepthTextureMode.Depth;
+                cam.depthTextureMode = DepthTextureMode.DepthNormals;
                 width = cam.pixelWidth;
                 height = cam.pixelWidth;
                 LightAWrapper.createLightAssignment(Mathf.Deg2Rad * cam.fieldOfView,
