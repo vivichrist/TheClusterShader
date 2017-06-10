@@ -46,11 +46,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ClusterShaderGUI.cs" />
      <Compile Include="Assets\Scripts\ClusteredShader.cs" />
      <Compile Include="Assets\Scripts\Fly.cs" />
      <Compile Include="Assets\Scripts\LightAWrapper.cs" />
+     <Compile Include="Assets\Scripts\TangentSpaceVisualizer.cs" />
+     <None Include="Assets\Shaders\My Shadows.cginc" />
      <None Include="Assets\Shaders\CustomStandardCore.cginc" />
      <None Include="Assets\Shaders\My First Shader.shader" />
+     <None Include="Assets\Shaders\My Lighting.cginc" />
      <None Include="Assets\Shaders\Texture Splatting.shader" />
      <None Include="Assets\Shaders\Standard.shader" />
      <None Include="Assets\Shaders\My First Lighting Shader.shader" />

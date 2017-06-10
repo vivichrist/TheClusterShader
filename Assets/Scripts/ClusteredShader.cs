@@ -28,19 +28,29 @@ public class ClusteredShader : MonoBehaviour
 #endif
         pLightParams = new List<float>();
         Light[] lights = FindObjectsOfType(typeof(Light)) as Light[];
-        // print("number of lights found:" + lights.GetLength(0));
         foreach (Light lgt in lights)
         {
-            if (lgt.type == LightType.Directional)
+            if (lgt.type == LightType.Directional || lgt.type == LightType.Area)
             {
                 // not collecting directional lights
                 continue;
             }
             // light position for point/spot lights is: (position, intensity)
-            pLightParams.AddRange(new float[] {lgt.transform.position.x, lgt.transform.position.y
-                                            , lgt.transform.position.z, lgt.range
-            });
-            pLightParams.AddRange(new float[]{ lgt.color.r, lgt.color.g, lgt.color.b, lgt.intensity });
+            if (lgt.type == LightType.Point)
+                pLightParams.AddRange(new [] {lgt.transform.position.x, lgt.transform.position.y
+                                                 , lgt.transform.position.z, lgt.range });
+            else 
+            {
+                float radAngle = Mathf.Deg2Rad * lgt.spotAngle;
+                float lRadius = Mathf.Cos(radAngle) * lgt.range;
+                Vector3 halfDir = lgt.transform.forward.normalized * lgt.range * 0.5f;
+                pLightParams.AddRange(new [] {lgt.transform.position.x + halfDir.x,
+                    lgt.transform.position.y + halfDir.y,
+                    lgt.transform.position.z + halfDir.z,
+                    Mathf.Max( lgt.range * 0.6f, lRadius ) });
+            }
+            // light colour + intensity.
+            pLightParams.AddRange(new [] { lgt.color.r, lgt.color.g, lgt.color.b, lgt.intensity });
             // attenuation set in a way where distance attenuation can be computed:
             //  float lengthSq = dot(toLight, toLight);
             //  float atten = 1.0 / (1.0 + lengthSq * LightAtten[i].z);
@@ -53,15 +63,11 @@ public class ClusteredShader : MonoBehaviour
 
             float rangeSq = lgt.range * lgt.range;
             float quadAtten = 25.0f / rangeSq;
-
             // spot direction & attenuation
             if (lgt.type == LightType.Spot)
             {
-                Vector4 dir = lgt.transform.forward;
-                dir.w = 0;
-                pLightParams.AddRange(new float[] {lgt.transform.forward.x, lgt.transform.forward.y
-                    , lgt.transform.forward.z, 0
-                });
+                Vector3 dir = lgt.transform.forward.normalized;
+                pLightParams.AddRange(new float[] {dir.x, dir.y, dir.z, 0});
 
                 float radAngle = Mathf.Deg2Rad * lgt.spotAngle;
                 float cosTheta = Mathf.Cos(radAngle * 0.25f);
@@ -71,7 +77,7 @@ public class ClusteredShader : MonoBehaviour
             } else
             {
                 // non-spot light
-                pLightParams.AddRange(new []{ 0.0f, 0.0f, 1.0f, 0.0f });
+                pLightParams.AddRange(new []{ 0.0f, 0.0f, 1.0f, 1.0f });
                 pLightParams.AddRange(new []{ -1.0f, 1.0f, quadAtten, rangeSq });
             }
         }

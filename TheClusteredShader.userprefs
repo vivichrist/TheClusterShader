@@ -1,13 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shaders/Clustering.shader">
     <Files>
-      <File FileName="Assets/Shaders/Clustering.shader" Line="127" Column="18" />
+      <File FileName="Assets/Shaders/Clustering.shader" Line="262" Column="22" />
+      <File FileName="Assets/Scripts/ClusteredShader.cs" Line="168" Column="1" />
+      <File FileName="Assets/Shaders/CustomStandardCore.cginc" Line="515" Column="38" />
+      <File FileName="../../../../../../home/vivichrist/unity/StandardShader/DefaultResourcesExtra/Standard.shader" Line="120" Column="4" />
+      <File FileName="Assets/Shaders/CustomStandardCoreForward.cginc" Line="1" Column="1" />
+      <File FileName="Assets/Shaders/CustomStandardCoreForwardSimple.cginc" Line="1" Column="1" />
       <File FileName="Assets/Shaders/My First Lighting Shader.shader" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ClusteredShader.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LightAWrapper.cs" Line="1" Column="1" />
-      <File FileName="Assets/Shaders/Standard.shader" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Fly.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
