@@ -58,6 +58,8 @@
      <None Include="Assets\Shaders\Texture Splatting.shader" />
      <None Include="Assets\Shaders\Standard.shader" />
      <None Include="Assets\Shaders\My First Lighting Shader.shader" />
+     <None Include="Assets\Shaders\ClusteringForward.shader" />
+     <None Include="Assets\Shaders\InteriorMap.shader" />
      <None Include="Assets\Shaders\Clustering.shader" />
      <None Include="Assets\Shaders\CustomStandardCoreForwardSimple.cginc" />
      <None Include="Assets\Shaders\Textured With Detail.shader" />

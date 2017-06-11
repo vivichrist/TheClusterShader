@@ -1,4 +1,4 @@
-﻿Shader "Standard/Clustering"
+﻿Shader "Standard/ClusteringPhong"
 {
 	Properties
 	{
@@ -67,7 +67,6 @@
 			#pragma target 4.5
 
 			#include "UnityCG.cginc"
-			#include "UnityStandardCore.cginc"
 			#include "UnityStandardConfig.cginc"
 			#include "UnityStandardInput.cginc"
 			#include "UnityPBSLighting.cginc"
@@ -76,6 +75,7 @@
 			#include "UnityStandardBRDF.cginc"
 
 			#include "AutoLight.cginc"
+			#include "UnityStandardCore.cginc"
 
 			#pragma shader_feature _NORMALMAP
 			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
@@ -200,22 +200,6 @@
 												 + (int)(depth * (float)(_Cellsz))];
 			}
 
-			inline fixed4 BlinnPhongLight (v2f i, FragmentCommonData s, UnityLight light)
-			{
-			    half3 h = normalize (light.dir + -s.eyeVec);
-
-			    fixed diff = max (0, dot (s.normalWorld, light.dir));
-
-			    float nh = max (0, dot (s.normalWorld, h));
-			    float spec = pow (nh, s.specColor*128.0) * s.smoothness;
-
-			    fixed4 c;
-			    c.rgb = s.diffColor * light.color * diff + light.color * spec;
-			    c.a = s.alpha;
-
-			    return c;
-			}
-
 			static const float Pi_2     = 1.570796327f;
 			half4 frag (v2f i, UNITY_VPOS_TYPE vpos : VPOS ) : SV_Target
 			{
@@ -230,18 +214,22 @@
 			    half occlusion = Occlusion(i.tex.xy);
 			    UnityGI gi = FragmentGI (s, occlusion, i.ambientOrLightmapUV, atten, mainLight);
 
-			    half4 col = UNITY_BRDF_PBS (s.diffColor, s.specColor, s.oneMinusReflectivity,
+			    half4 maincol = UNITY_BRDF_PBS (s.diffColor, s.specColor, s.oneMinusReflectivity,
 			    							   s.smoothness, s.normalWorld, -s.eyeVec,
 			    							   gi.light, gi.indirect);
-			    col.rgb += Emission(i.tex.xy);
+			    maincol.rgb += Emission(i.tex.xy);
 			    lightListIndex cluster = getCluster( vpos );
-				col *= atten;
+				
+				#if defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON)
+			        maincol.a = s.alpha;
+			    #else
+			        UNITY_OPAQUE_ALPHA(maincol.a);
+			    #endif
+				maincol *= atten;
 				// if no other lights affect this pixel.
 				if (cluster.listsize == 0)
-				{
-					col = half4( max( col.rgb, s.diffColor * 0.1), col.a);
-					return col;
-				}
+					return maincol;
+				half4 col = maincol;
 				half attn;
 				half3 specularTint;
 				float oneMinusReflectivity;
@@ -275,7 +263,7 @@
 						light.dir = normalize(ldir);
 
 						half4 c = UNITY_BRDF_PBS(
-							col, specularTint,
+							half4(col.rgb, 1), specularTint,
 							oneMinusReflectivity, s.smoothness,
 							s.normalWorld,-s.eyeVec,
 							light, indirLight
@@ -285,14 +273,8 @@
 									 min(max(c.b * attn, indirLight.diffuse.b), col.b), 1);
 					}
 				}
-				col = half4( max( col.rgb, s.diffColor * 0.04), col.a);
 				UNITY_APPLY_FOG(i.fogCoord, col);
-				#if defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON)
-			        col.a = s.alpha;
-			    #else
-			        UNITY_OPAQUE_ALPHA(col.a);
-			    #endif
-				return col;
+				return col + i.ambientOrLightmapUV;
 			}
 			ENDCG
 		}
