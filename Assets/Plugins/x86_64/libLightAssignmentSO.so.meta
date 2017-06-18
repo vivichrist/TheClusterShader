@@ -1,7 +1,6 @@
 fileFormatVersion: 2
-
-guid: 1cf0a043a57023540b54a54b96722733
-timeCreated: 1497199976
+guid: a99e319447a254dfdb718034829d553b
+timeCreated: 1497762978
 licenseType: Free
 PluginImporter:
   serializedVersion: 2
@@ -25,9 +24,10 @@ PluginImporter:
           Exclude OSXIntel64: 1
           Exclude OSXUniversal: 1
           Exclude SamsungTV: 0
+          Exclude Tizen: 0
+          Exclude WebGL: 0
           Exclude Win: 1
           Exclude Win64: 1
-          Exclude WindowsStoreApps: 0
           Exclude iOS: 0
     data:
       first:
@@ -137,15 +137,16 @@ PluginImporter:
           CPU: AnyCPU
     data:
       first:
-        Windows Store Apps: WindowsStoreApps
+        Tizen: Tizen
       second:
         enabled: 1
-        settings:
-          CPU: AnyCPU
-          DontProcess: False
-          PlaceholderPath: 
-          SDK: AnySDK
-          ScriptingBackend: AnyScriptingBackend
+        settings: {}
+    data:
+      first:
+        WebGL: WebGL
+      second:
+        enabled: 1
+        settings: {}
     data:
       first:
         iPhone: iOS

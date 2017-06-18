@@ -50,31 +50,15 @@
      <Compile Include="Assets\Scripts\ClusteredShaderGUI.cs" />
      <Compile Include="Assets\Scripts\Fly.cs" />
      <Compile Include="Assets\Scripts\LightAWrapper.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\IO\OtherIOHelper.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\IO\WebPlayerIOHelper.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\IO\WindowsAppStoreIOHelper.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\IOpen.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\LinuxOpen.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\OSXOpen.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\OpenFactory.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\WinOpen.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\Reflection\OtherReflectionHelper.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\Reflection\WindowsAppStoreReflectionHelper.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\RuntimeProcessRunner.cs" />
-     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\UnityEditor\EditorUnityEditorHelper.cs" />
      <None Include="Assets\Shaders\My Shadows.cginc" />
-     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredWipeLeft.shader" />
-     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredDissolve.shader" />
-     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredWipeDown.shader" />
      <None Include="Assets\Shaders\My First Shader.shader" />
      <None Include="Assets\Shaders\My Lighting.cginc" />
      <None Include="Assets\Shaders\Texture Splatting.shader" />
-     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredWipeUp.shader" />
+     <None Include="Assets\Materials\InteriorMap.shader" />
      <None Include="Assets\Standard Assets\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Shaders\My First Lighting Shader.shader" />
      <None Include="Assets\Shaders\InteriorMap.shader" />
      <None Include="Assets\Shaders\Clustering.shader" />
-     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredWipeRight.shader" />
      <None Include="Assets\Shaders\Textured With Detail.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -96,12 +80,6 @@
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
- </Reference>
- <Reference Include="sharedRuntime">
- <HintPath>/media/scratchdisk/uni/CGRA402/clustered shading/TheClusteredShader/Assets/WellFired/shared/Compiled/Runtime/sharedRuntime.dll</HintPath>
- </Reference>
- <Reference Include="urecordRuntime">
- <HintPath>/media/scratchdisk/uni/CGRA402/clustered shading/TheClusteredShader/Assets/WellFired/urecord/Compiled/Runtime/urecordRuntime.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
