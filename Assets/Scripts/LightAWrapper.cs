@@ -6,7 +6,7 @@ public static class LightAWrapper
 {
 
 #if UNITY_STANDALONE_WIN
-	private const static string LIBRARY_NAME = "LightAssignmentDLL";
+	private const string LIBRARY_NAME = "LightAssignmentDLL";
 
 
 #elif UNITY_STANDALONE_LINUX
