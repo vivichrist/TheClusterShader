@@ -21,7 +21,7 @@ public class ClusteredShader : MonoBehaviour
     public Camera cam;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         RegisterPlugin();
@@ -80,6 +80,7 @@ public class ClusteredShader : MonoBehaviour
                 pLightParams.AddRange(new []{ 0.0f, 0.0f, 1.0f, 1.0f });
                 pLightParams.AddRange(new []{ -1.0f, 1.0f, quadAtten, rangeSq });
             }
+            //Destroy(lgt);
         }
         if (pLightParams.Count != 0)
         {
@@ -103,7 +104,7 @@ public class ClusteredShader : MonoBehaviour
             } else
             {
                 Debug.Log("Camera:" + cam);
-                cam.depthTextureMode = DepthTextureMode.DepthNormals;
+                //cam.depthTextureMode = DepthTextureMode.DepthNormals;
                 width = cam.pixelWidth;
                 height = cam.pixelWidth;
                 LightAWrapper.createLightAssignment(Mathf.Deg2Rad * cam.fieldOfView,
@@ -143,9 +144,10 @@ public class ClusteredShader : MonoBehaviour
 
             }
         }
+        yield return StartCoroutine("CallPluginAtEndOfFrames");
     }
 
-    void OnPostRender()
+    void Update()
     {
         cam = GetComponent<Camera>();
         if (cam == null || cam.enabled == false)
@@ -153,7 +155,6 @@ public class ClusteredShader : MonoBehaviour
             Debug.LogError("NoCamera");
         } else
         {
-            //Debug.Log("CallPlugin!");
             LightAWrapper.clearLightAssignment();
             LightAWrapper.createCullingPlanes(cam.transform.position,
                                                   cam.transform.up.normalized,
@@ -170,19 +171,26 @@ public class ClusteredShader : MonoBehaviour
                 LightAWrapper.setLightListsPtr(ref xptr);
                 System.IntPtr xxxptr = txxx.GetNativeBufferPtr();
                 LightAWrapper.setClustersPtr(ref xxxptr);
-                // Issue a plugin event with arbitrary integer identifier.
-                // The plugin can distinguish between different
-                // things it needs to do based on this ID.
-                // For our simple plugin, it does not matter which ID we pass here.
-                GL.IssuePluginEvent(LightAWrapper.GetRenderEventFunc(), 1);
             }
         }
     }
 
+    private IEnumerator CallPluginAtEndOfFrames()
+    {
+        while (true) {
+            // Wait until all frame rendering is done
+            yield return new WaitForEndOfFrame();
+            // Issue a plugin event with arbitrary integer identifier.
+            // The plugin can distinguish between different
+            // things it needs to do based on this ID.
+            // For our simple plugin, it does not matter which ID we pass here.
+            GL.IssuePluginEvent(LightAWrapper.GetRenderEventFunc(), 1);
+        }
+    }
 
     void OnDestroy()
     {
-        LightAWrapper.clearLightAssignment();
+        LightAWrapper.disposeLightAssignment();
         pBuffer.Release();
         tx.Release();
         txxx.Release();

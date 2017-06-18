@@ -38,10 +38,6 @@ public static class LightAWrapper
     private static extern void findBVs([In] float[,] ls,
                                        ref ulong size);
 
-    [DllImport(LIBRARY_NAME, EntryPoint = "findBV")]
-    private static extern void findBV([In] float[] ls,
-                                      [Out][MarshalAs(UnmanagedType.LPArray, SizeConst = 6)] uint[] result);
-
     [DllImport(LIBRARY_NAME, EntryPoint = "findregBVs")]
     public static extern void scanRegisteredLights();
 
@@ -102,14 +98,6 @@ public static class LightAWrapper
         Assert.IsTrue(lights.GetLength(1) == 4);
         ulong size = (ulong)lights.GetLongLength(0);
         findBVs(lights, ref size);
-    }
-
-    public static uint[] scanLight(Vector3 light, float radius)
-    {
-        float[] l = { light.x, light.y, light.z, radius };
-        uint[] result = new uint[6];
-        findBV(l, result);
-        return result;
     }
 
     [DllImport(LIBRARY_NAME, EntryPoint = "setClusterPtr")]

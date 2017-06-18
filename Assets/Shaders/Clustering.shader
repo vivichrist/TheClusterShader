@@ -239,7 +239,7 @@
 				// if no other lights affect this pixel.
 				if (cluster.listsize == 0)
 				{
-					col = half4( max( col.rgb, s.diffColor * 0.1), col.a);
+					col = half4( max( col.rgb, s.diffColor * 0.06), col.a);
 					return col;
 				}
 				half attn;
@@ -285,7 +285,7 @@
 									 min(max(c.b * attn, indirLight.diffuse.b), col.b), 1);
 					}
 				}
-				col = half4( max( col.rgb, s.diffColor * 0.04), col.a);
+				col = half4( max( col.rgb, s.diffColor * 0.06), col.a);
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				#if defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON)
 			        col.a = s.alpha;
@@ -320,5 +320,30 @@
 
 			ENDCG
 		}
+		// ------------------------------------------------------------------
+		// Extracts information for lightmapping, GI (emission, albedo, ...)
+		// This pass it not used during regular rendering.
+		Pass
+		{
+			Name "META" 
+			Tags { "LightMode"="Meta" }
+
+			Cull Off
+
+			CGPROGRAM
+			#pragma vertex vert_meta
+			#pragma fragment frag_meta
+
+			#pragma shader_feature _EMISSION
+			#pragma shader_feature _METALLICGLOSSMAP
+			#pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+			#pragma shader_feature ___ _DETAIL_MULX2
+			#pragma shader_feature EDITOR_VISUALIZATION
+
+			#include "UnityStandardMeta.cginc"
+			ENDCG
+		}
 	}
+	//FallBack "VertexLit"
+	CustomEditor "ClusteredShaderGUI"
 }

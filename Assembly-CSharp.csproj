@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;UNITY_64;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_LINUX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;UNITY_64;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_LINUX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -46,25 +46,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\ClusterShaderGUI.cs" />
      <Compile Include="Assets\Scripts\ClusteredShader.cs" />
+     <Compile Include="Assets\Scripts\ClusteredShaderGUI.cs" />
      <Compile Include="Assets\Scripts\Fly.cs" />
      <Compile Include="Assets\Scripts\LightAWrapper.cs" />
-     <Compile Include="Assets\Scripts\TangentSpaceVisualizer.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\IO\OtherIOHelper.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\IO\WebPlayerIOHelper.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\IO\WindowsAppStoreIOHelper.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\IOpen.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\LinuxOpen.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\OSXOpen.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\OpenFactory.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\OpenInExplorer\WinOpen.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\Reflection\OtherReflectionHelper.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\Reflection\WindowsAppStoreReflectionHelper.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\RuntimeProcessRunner.cs" />
+     <Compile Include="Assets\WellFired\shared\Uncompiled\Runtime\Platform Specific\UnityEditor\EditorUnityEditorHelper.cs" />
      <None Include="Assets\Shaders\My Shadows.cginc" />
-     <None Include="Assets\Shaders\CustomStandardCore.cginc" />
+     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredWipeLeft.shader" />
+     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredDissolve.shader" />
+     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredWipeDown.shader" />
      <None Include="Assets\Shaders\My First Shader.shader" />
      <None Include="Assets\Shaders\My Lighting.cginc" />
      <None Include="Assets\Shaders\Texture Splatting.shader" />
-     <None Include="Assets\Shaders\Standard.shader" />
+     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredWipeUp.shader" />
+     <None Include="Assets\Standard Assets\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Shaders\My First Lighting Shader.shader" />
-     <None Include="Assets\Shaders\ClusteringForward.shader" />
      <None Include="Assets\Shaders\InteriorMap.shader" />
      <None Include="Assets\Shaders\Clustering.shader" />
-     <None Include="Assets\Shaders\CustomStandardCoreForwardSimple.cginc" />
+     <None Include="Assets\WellFired\shared\Uncompiled\Resources\Transitions\WellFiredWipeRight.shader" />
      <None Include="Assets\Shaders\Textured With Detail.shader" />
-     <None Include="Assets\Shaders\CustomStandardCoreForward.cginc" />
-     <None Include="Assets\Shaders\CustomShaderVariables.cginc" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -86,6 +97,16 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
+ <Reference Include="sharedRuntime">
+ <HintPath>/media/scratchdisk/uni/CGRA402/clustered shading/TheClusteredShader/Assets/WellFired/shared/Compiled/Runtime/sharedRuntime.dll</HintPath>
+ </Reference>
+ <Reference Include="urecordRuntime">
+ <HintPath>/media/scratchdisk/uni/CGRA402/clustered shading/TheClusteredShader/Assets/WellFired/urecord/Compiled/Runtime/urecordRuntime.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{F9A6D178-485D-E4E4-334D-DBCEBE20D6FC}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
