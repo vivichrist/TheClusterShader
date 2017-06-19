@@ -1,4 +1,4 @@
-THE NATIVE RENDERING PLUGIN
+THE NATIVE RENDERING PLUGIN (https://bitbucket.org/vivichrist/cshinunity/)
 The plugin is all C++ and requires the following includes/libraries to compile:
 
 	GLEW - on windows this should not be needed as it is statically linked
@@ -16,7 +16,7 @@ requires:
 	Windows SDK (DirectX includes and libs)
 	Visual Studio 2017
 
-UNITY PROJECT
+UNITY PROJECT (https://github.com/vivichrist/TheClusterShader/)
 To make clustering work in the unity project. All materials in the scene
 (final.scene) should be changed from the Standard shader to Clustering shader.
 For some reason this doen't save and I have no idea why... Selecting the main
