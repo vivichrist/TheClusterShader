@@ -27,3 +27,10 @@ frame rates. Keys WASD and mouse look when you press play.
 
 The project can't be built in the Unity editor (Linux beta), again, I don't know
 why.
+
+The main files that do Clustered Shading are:
+Assets/Plugins/*
+Assets/Scripts/LightAWrapper.cs
+Assets/Scripts/ClusteredShader.cs
+Assets/Scripts/ClusteredShaderGUI.cs
+Assets/Shaders/Clustering.shader
